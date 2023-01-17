@@ -14,6 +14,10 @@
 		478AA22F2975B58300679BCE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AA22E2975B58300679BCE /* Persistence.swift */; };
 		478AA2322975B58300679BCE /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 478AA2302975B58300679BCE /* Todo.xcdatamodeld */; };
 		478AA23B2975B66600679BCE /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AA23A2975B66600679BCE /* AddTodoView.swift */; };
+		47D7BCB92977035800950678 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7BCB82977035800950678 /* EmptyListView.swift */; };
+		47D7BCBB29770FA800950678 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7BCBA29770FA800950678 /* SettingsView.swift */; };
+		47D7BCBD2977111E00950678 /* FormRowStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7BCBC2977111E00950678 /* FormRowStaticView.swift */; };
+		47D7BCBF2977127D00950678 /* FormRowLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7BCBE2977127D00950678 /* FormRowLinkView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		478AA2312975B58300679BCE /* Todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Todo.xcdatamodel; sourceTree = "<group>"; };
 		478AA2382975B5E200679BCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		478AA23A2975B66600679BCE /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
+		47D7BCB82977035800950678 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		47D7BCBA29770FA800950678 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		47D7BCBC2977111E00950678 /* FormRowStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStaticView.swift; sourceTree = "<group>"; };
+		47D7BCBE2977127D00950678 /* FormRowLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowLinkView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,10 @@
 			children = (
 				478AA2272975B58200679BCE /* ContentView.swift */,
 				478AA23A2975B66600679BCE /* AddTodoView.swift */,
+				47D7BCB82977035800950678 /* EmptyListView.swift */,
+				47D7BCBA29770FA800950678 /* SettingsView.swift */,
+				47D7BCBC2977111E00950678 /* FormRowStaticView.swift */,
+				47D7BCBE2977127D00950678 /* FormRowLinkView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,8 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D7BCBB29770FA800950678 /* SettingsView.swift in Sources */,
+				47D7BCBD2977111E00950678 /* FormRowStaticView.swift in Sources */,
+				47D7BCBF2977127D00950678 /* FormRowLinkView.swift in Sources */,
 				478AA22F2975B58300679BCE /* Persistence.swift in Sources */,
 				478AA2282975B58200679BCE /* ContentView.swift in Sources */,
+				47D7BCB92977035800950678 /* EmptyListView.swift in Sources */,
 				478AA2262975B58200679BCE /* TodoApp.swift in Sources */,
 				478AA2322975B58300679BCE /* Todo.xcdatamodeld in Sources */,
 				478AA23B2975B66600679BCE /* AddTodoView.swift in Sources */,

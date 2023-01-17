@@ -14,13 +14,21 @@ struct AddTodoView: View {
     @State private var name = ""
     @State private var priority = "标准"
     
+    @State private var errorShowing = false
+    @State private var errorTitle = ""
+    @State private var errorMessage = ""
+    
     let priorities = ["高","标准","低"]
     
     var body: some View {
         NavigationView(content: {
             VStack{
-                Form{
+                VStack(alignment: .leading,spacing: 20){
                     TextField("待办事项",text: $name)
+                        .padding()
+                        .background(Color(UIColor.tertiarySystemFill))
+                        .cornerRadius(9)
+                        .font(.system(size: 24,weight: .bold,design: .default))
                     
                     Picker("优先级",selection: $priority){
                         ForEach(priorities,id: \.self){
@@ -42,22 +50,40 @@ struct AddTodoView: View {
                             }catch{
                                 print(error)
                             }
+                        }else{
+                            self.errorShowing = true
+                            self.errorTitle = "无效的名称"
+                            self.errorMessage = "请确保你输入的内容是\n待办事项必须的。"
+                            return
                         }
+                        self.presenationMode.wrappedValue.dismiss()
                         
                     }, label: {
                         Text("保存")
+                            .font(.system(size: 24,weight: .bold,design: .default))
+                            .padding()
+                            .frame(minWidth: 0,maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(9)
+                            .foregroundColor(.white)
                     })
                 }
                 
                 Spacer()
                 
             }
+            .padding(.horizontal)
+            .padding(.vertical,30)
             .navigationBarTitle("新的任务",displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 self.presenationMode.wrappedValue.dismiss()
             }, label: {
                 Image(systemName: "xmark")
             }))
+            .alert(isPresented: $errorShowing, content: {
+                Alert(title: Text(errorTitle),message: Text(errorMessage),dismissButton: .default(Text("确认")))
+            })
+            
         })
     }
 }
