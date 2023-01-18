@@ -10,12 +10,41 @@ import SwiftUI
 struct SettingsView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
+    let themes: [Theme] = themeData
+    @ObservedObject var theme = ThemeSettings()
     
     var body: some View {
         NavigationView(content: {
             VStack(alignment: .center,spacing: 0, content: {
                 Form{
+
+                    Section(header:
+                                HStack{
+                        Text("选择应用程序的配色主题")
+                        
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(width: 10,height: 10)
+                            .foregroundColor(themes[self.theme.themeSettings].themeColor)
+                    }
+                                
+                                , content: {
+                        List(themes){
+                            item in Button(action: {
+                                self.theme.themeSettings = item.id
+                            }, label: {
+                                HStack{
+                                    Image(systemName: "circle.fill")
+                                        .foregroundColor(item.themeColor)
+                                    Text(item.themeName)
+                                }
+                            })
+                            .accentColor(Color.primary)
+                            
+                            
+                        }
+                    })
+                    .padding(.vertical,3)
                     
                     Section(header: Text("欢迎关注以下社交媒体"), content: {
                         FormRowLinkView(icon: "globe", color: .pink, text: "网址", link: "https://www.baidu.com")
@@ -45,6 +74,7 @@ struct SettingsView: View {
             .background(Color("ColorBackground"))
 
         })
+        .accentColor(themes[self.theme.themeSettings].themeColor)
         
         
     }

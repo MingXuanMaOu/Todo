@@ -9,7 +9,8 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    
+    @ObservedObject var theme = ThemeSettings()
+    var themes: [Theme] = themeData
     @State private var showingSettingsView = false
     @State private var animationgButton = false
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -24,10 +25,22 @@ struct ContentView: View {
                 List{
                     ForEach(self.todos, id:\.self){
                         todo in HStack{
+                            Circle()
+                                .frame(width: 12,height: 12,alignment: .center)
+                                .foregroundColor(self.colorize(priority: todo.priority ?? "标准"))
                             Text(todo.name ?? "未知")
+                                .fontWeight(.semibold)
                             Spacer()
                             Text(todo.priority ?? "未知")
+                                .font(.footnote)
+                                .foregroundColor(Color(UIColor.systemGray2))
+                                .padding(3)
+                                .frame(minWidth: 62)
+                                .overlay(content: {
+                                    Capsule().stroke(Color(UIColor.systemGray2),lineWidth: 0.75)
+                                })
                         }
+                        .padding(.vertical,10)
                     }
                     .onDelete(perform: deleteTodo)
                 }
@@ -39,12 +52,12 @@ struct ContentView: View {
                 ZStack{
                     Group{
                         Circle()
-                            .fill(Color.blue)
+                            .fill(themes[self.theme.themeSettings].themeColor)
                             .opacity(animationgButton ? 0.2: 0)
                             .scaleEffect(animationgButton ? 1: 0)
                             .frame(width: 68,height: 68,alignment: .center)
                         Circle()
-                            .fill(Color.blue)
+                            .fill(themes[self.theme.themeSettings].themeColor)
                             .opacity(animationgButton ? 0.15: 0)
                             .scaleEffect(animationgButton ? 1: 0)
                             .frame(width: 88,height: 88,alignment: .center)
@@ -61,6 +74,7 @@ struct ContentView: View {
                             .background(Circle().fill(Color("ColorBase")))
                             .frame(width: 48,height: 48,alignment: .center)
                     })
+                    .accentColor(themes[self.theme.themeSettings].themeColor)
                     .onAppear(){
                         animationgButton.toggle()
                     }
@@ -74,12 +88,14 @@ struct ContentView: View {
             .navigationBarTitle("待办事项",displayMode: .inline)
             .listStyle(PlainListStyle())
             .navigationBarItems(
-                leading: EditButton(),
+                leading: EditButton()
+                    .accentColor(themes[self.theme.themeSettings].themeColor),
                 trailing: Button(action: {
                     self.showingSettingsView.toggle()
             }, label:{
                 Image(systemName: "paintbrush")
             }))
+            .accentColor(themes[self.theme.themeSettings].themeColor)
             .sheet(isPresented: $showingSettingsView, content: {
                 SettingsView().environment(\.managedObjectContext, self.managedObjectContext)
             })
@@ -97,6 +113,19 @@ struct ContentView: View {
             }catch{
                 print(error)
             }
+        }
+    }
+    
+    private func colorize(priority: String) -> Color{
+        switch priority{
+        case "高":
+            return .pink
+        case "标准":
+            return .green
+        case "低":
+            return .blue
+        default:
+            return .gray
         }
     }
 
